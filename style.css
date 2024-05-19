@@ -1,0 +1,145 @@
+/* style.css */
+
+/* Gradient background */
+body {
+    background: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form styling */
+form {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px 20px 05px 20px ;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Fixed width for consistency */
+}
+
+/* Input fields */
+input[type="text"], input[type="password"], input[type="email"], input[type="file"] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit button */
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Link text color */
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error message */
+h3.error {
+    color: #ff4d4d;
+    margin: 0; /* Remove default margins */
+}
+
+/* Success message */
+h3.success {
+    color: #4CAF50;
+    margin: 0; /* Remove default margins */
+}
+
+/* Message container */
+#message {
+    margin-top: 15px; /* Space between form and message */
+}
+
+
+/* Dashboard styling */
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+/* Card styling */
+.card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left;
+}
+
+/* Button styling */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button a{
+    color: white;
+    text-decoration: none!important;
+}
+
+#updateBtn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#updateBtn:hover {
+    background-color: #45a049;
+}
+
+#deleteBtn {
+    background-color: #f44336;
+    color: white;
+}
+
+#deleteBtn:hover {
+    background-color: #e53935;
+}
+
+#logoutBtn {
+    background-color: #ffa500;
+    color: white;
+}
+
+#logoutBtn:hover {
+    background-color: #e69500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .card {
+        width: 90%;
+    }
+}
