@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['name'], $_SESSION['id'],$_SESSION['email'],$_SESSION['mobile'])){
+if(!isset($_SESSION['photo'],$_SESSION['name'], $_SESSION['id'],$_SESSION['email'],$_SESSION['mobile'])){
     header('location:login.php');
 }
 ?>
@@ -18,6 +18,7 @@ if(!isset($_SESSION['name'], $_SESSION['id'],$_SESSION['email'],$_SESSION['mobil
         <div class="dashboard">
             <div class="card">
                 <h2>User Details</h2>
+                <img src="uploads/<?php echo $_SESSION['photo'] ?>" alt="User Photo">  
                 <p><strong>Name:</strong> <span id="userName"><?php echo $_SESSION['name'] ?></span></p>
                 <p><strong>Email:</strong> <span id="userEmail"><?php echo $_SESSION['email'] ?></span></p>
                 <p><strong>Mobile:</strong> <span id="userMobile"><?php echo $_SESSION['mobile'] ?></span></p>
