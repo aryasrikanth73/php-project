@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CREATE | SIGNUP</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
     <script>
     function validateForm() {
         var name = document.forms["signupForm"]["fname"].value;
@@ -33,18 +36,35 @@
         }
         return true;
     }
+
+    function showPassword() {
+    var passwordField1 = document.getElementById('shown');
+    var passwordField2 = document.getElementById('show');
+    
+    if (passwordField1.type === 'password' && passwordField2.type === 'password') {
+        passwordField1.type = 'text';
+        passwordField2.type = 'text';
+    } else {
+        passwordField1.type = 'password';
+        passwordField2.type = 'password';
+    }
+}
 </script>
 
 </head>
 <body>
     <center>
         <h1>SIGN UP HERE</h1>
-        <form name="signupForm" method="post" onsubmit="return validateForm()">
+        <form name="signupForm" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
             <input type="text" name="fname" placeholder="Enter Your Name Here...." required><br>
             <input type="email" name="femail" placeholder="Enter Your Email Here...." required>
             <input type="text" name="fmobile" placeholder="Enter Your Mobile Number Here...." required><br>
-            <input type="password" name="fpassword" placeholder="Enter Password Here...." required><br>
-            <input type="password" name="fcpassword" placeholder="Enter Confirm Password Here...." required><br>
+            <input type="password" id="shown" name="fpassword" placeholder="Enter Password Here...." required><br>
+            <input type="password" id="show" name="fcpassword" placeholder="Enter Confirm Password Here...." required><br>
+            <input type="file" name="photo" accept="image/*"><br>
+            <div class="checkbox-container">
+            <input type="checkbox" onclick="showPassword()"><label for="toggle-password">Show/Hide Passwords</label>
+            </div>
             <button type="submit" name="submit">Sign Up</button>
             <a href="login.php"><strong>Already a user?</strong></a>
             <div id="message"></div>
@@ -61,6 +81,12 @@ if(isset($_POST['submit'])){
     $mobile = trim($_POST['fmobile']);
     $password = trim(md5($_POST['fpassword']));
     $cpassword = trim(md5($_POST['fcpassword']));
+
+    $photo = $_FILES['photo']['name'];
+    $temp_name = $_FILES['photo']['tmp_name'];
+    $folder = "uploads/";
+
+    
     
     // Basic validation
     if(empty($name) || empty($email) || empty($mobile) || empty($password) || empty($cpassword)){
@@ -74,7 +100,7 @@ if(isset($_POST['submit'])){
     } else {
         // Hash the password
         // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
+        move_uploaded_file($temp_name, $folder . $photo);
         $sql = "SELECT * FROM `customer` WHERE email='$email' OR mobile='$mobile'";
         $result = mysqli_query($con, $sql);
 
@@ -83,7 +109,7 @@ if(isset($_POST['submit'])){
             if($num > 0){
                 echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">Email or Mobile Number already used! Please try another one</h3>';</script>";
             } else {
-                $sql = "INSERT INTO `customer` (name, email, mobile, password) VALUES('$name', '$email', '$mobile', '$password')";
+                $sql = "INSERT INTO `customer` (name, email, mobile, password, photo) VALUES('$name', '$email', '$mobile', '$password', '$photo')";
                 $result = mysqli_query($con, $sql);
                 if($result){
                     echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"success\">Successfully Registered</h3>';</script>";
