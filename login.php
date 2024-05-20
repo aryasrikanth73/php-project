@@ -39,6 +39,7 @@
                 $_SESSION['email']=$row['email'];
                 $_SESSION['mobile']=$row['mobile'];
                 $_SESSION['password']=$row['password'];
+                $_SESSION['photo']=$row['photo'];
                 header('location:welcome.php');
             }else{
                 echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">Invalid Credentials</h3>';</script>";
