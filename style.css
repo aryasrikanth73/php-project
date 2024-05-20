@@ -1,6 +1,3 @@
-/* style.css */
-
-/* Gradient background */
 body {
     background: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
     font-family: Arial, sans-serif;
@@ -12,16 +9,16 @@ body {
     align-items: center;
 }
 
-/* Form styling */
+
 form {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px 20px 05px 20px ;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Fixed width for consistency */
+    width: 300px; 
 }
 
-/* Input fields */
+
 input[type="text"], input[type="password"], input[type="email"], input[type="file"] {
     width: 80%;
     padding: 10px;
@@ -30,7 +27,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
     border-radius: 5px;
 }
 
-/* Submit button */
+
+
 button {
     padding: 10px 20px;
     border: none;
@@ -44,7 +42,7 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Link text color */
+
 a {
     color: #0066cc;
     text-decoration: none;
@@ -54,25 +52,25 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Error message */
+
 h3.error {
     color: #ff4d4d;
-    margin: 0; /* Remove default margins */
+    margin: 0; 
 }
 
-/* Success message */
+
 h3.success {
     color: #4CAF50;
-    margin: 0; /* Remove default margins */
+    margin: 0; 
 }
 
-/* Message container */
+
 #message {
-    margin-top: 15px; /* Space between form and message */
+    margin-top: 15px; 
 }
 
 
-/* Dashboard styling */
+
 .dashboard {
     display: flex;
     justify-content: center;
@@ -80,7 +78,7 @@ h3.success {
     margin: 20px auto;
 }
 
-/* Card styling */
+
 .card {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -90,7 +88,7 @@ h3.success {
     text-align: left;
 }
 
-/* Button styling */
+
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -137,9 +135,32 @@ button a{
     background-color: #e69500;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 600px) {
     .card {
         width: 90%;
     }
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px ;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px; 
+}
+
+.checkbox-container label {
+    font-size: 12px; 
+}
+
+
+.card img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
 }
