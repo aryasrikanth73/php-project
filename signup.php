@@ -75,6 +75,11 @@
 <?php
 include('connection.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 if(isset($_POST['submit'])){
     $name = trim($_POST['fname']);
     $email = trim($_POST['femail']);
@@ -88,7 +93,6 @@ if(isset($_POST['submit'])){
 
     
     
-    // Basic validation
     if(empty($name) || empty($email) || empty($mobile) || empty($password) || empty($cpassword)){
         echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">All fields must be filled out</h3>';</script>";
     } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -98,8 +102,6 @@ if(isset($_POST['submit'])){
     } elseif(strlen($password) < 6) {
         echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">Password must be at least 6 characters long</h3>';</script>";
     } else {
-        // Hash the password
-        // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         move_uploaded_file($temp_name, $folder . $photo);
         $sql = "SELECT * FROM `customer` WHERE email='$email' OR mobile='$mobile'";
         $result = mysqli_query($con, $sql);
@@ -112,8 +114,35 @@ if(isset($_POST['submit'])){
                 $sql = "INSERT INTO `customer` (name, email, mobile, password, photo) VALUES('$name', '$email', '$mobile', '$password', '$photo')";
                 $result = mysqli_query($con, $sql);
                 if($result){
-                    echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"success\">Successfully Registered</h3>';</script>";
-                } else {
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'aryasrikanth73@gmail.com'; // SMTP username
+                        $mail->Password = 'kddjrenuqhjmgkfu'; // SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port = 587;
+
+                        //Recipients
+                        $mail->setFrom('aryasrikanth73@gmail.com', 'Arya');
+                        $mail->addAddress($email, $name);
+
+                        // Content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Welcome to Our Service';
+                        $mail->Body = 'Dear <strong>' . $name . '</strong><br>, <strong>' . $email . '</strong><br><br>Welcome to our service! We are thrilled to have you on board.
+                        
+                        <br><br>Best Regards,<br>Srikanth Arya';
+
+                        $mail->send();
+                    echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"success\">Successfully Registered, Welcome email sent...</h3>';</script>";
+                }catch (Exception $e) {
+                    echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">Registration successful, but email could not be sent. Mailer Error: {$mail->ErrorInfo}</h3>';</script>";
+                }
+             } else {
                     echo "<script>document.getElementById('message').innerHTML = '<h3 class=\"error\">Registration failed. Please try again later.</h3>';</script>";
                 }
             }
